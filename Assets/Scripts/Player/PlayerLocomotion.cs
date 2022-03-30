@@ -17,9 +17,16 @@ public class PlayerLocomotion : MonoBehaviour
     public Transform camParent;
     public Transform cam;
     //public Transform camPivot;
+    public Transform player;
 
     public float movementModifier = 10f;
     public float rotationSpeed = 10f;
+
+    private Vector3 lastTrans;
+
+    [SerializeField]
+    private Vector3 playerSpeed;
+    public float stepCounter;
 
    
    
@@ -61,16 +68,23 @@ public class PlayerLocomotion : MonoBehaviour
     /// <param name="delta"></param>
     private void HandleMovement(float delta)
     {
+
+        lastTrans = player.position;
+
         Vector3 movement = (input.move.x*camParent.right)+(input.move.y*camParent.forward);
 
-       
+        Vector3 move =( movement * movementModifier * delta);
 
 
-        controller.Move(movement*movementModifier*delta);
-
-        
+        controller.Move(move);
 
 
+        playerSpeed = move/delta;
+
+        if (lastTrans + (move) == player.position&& move != Vector3.zero)
+        {
+            stepCounter+= movementModifier*delta;
+        }
 
     }
 

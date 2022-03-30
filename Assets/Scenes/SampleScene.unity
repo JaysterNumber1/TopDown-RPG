@@ -1372,8 +1372,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camParent: {fileID: 368832840}
   cam: {fileID: 1389433990}
-  movementModifier: 5
+  player: {fileID: 847105509}
+  movementModifier: 0.11
   rotationSpeed: 0.1
+  playerSpeed: {x: 0, y: 0, z: 0}
+  stepCounter: 0
 --- !u!114 &847105512
 MonoBehaviour:
   m_ObjectHideFlags: 0
