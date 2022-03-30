@@ -18,6 +18,9 @@ public class PlayerLocomotion : MonoBehaviour
     public Transform cam;
     //public Transform camPivot;
     public Transform player;
+    public Transform groundChecker;
+    //public bool Raycast() groundChecker;
+    public LayerMask ground;
 
     public float movementModifier = 10f;
     public float rotationSpeed = 10f;
@@ -27,9 +30,13 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private Vector3 playerSpeed;
     public float stepCounter;
+    [SerializeField]
+    private float gravity = -9.8f;
+    [SerializeField]
+    private float groundOffset = .1f;
 
-   
-   
+
+
 
 
     // Start is called before the first frame update
@@ -71,7 +78,17 @@ public class PlayerLocomotion : MonoBehaviour
 
         lastTrans = player.position;
 
-        Vector3 movement = (input.move.x*camParent.right)+(input.move.y*camParent.forward);
+        Vector3 movement = (input.move.x * camParent.right)+  (input.move.y * camParent.forward);
+
+        RaycastHit hit;
+
+        if(!(Physics.Raycast(groundChecker.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Abs(groundOffset), ground))
+            )
+        {
+            movement = new Vector3(movement.x, gravity, movement.z);
+          
+        }
+
 
         Vector3 move =( movement * movementModifier * delta);
 
