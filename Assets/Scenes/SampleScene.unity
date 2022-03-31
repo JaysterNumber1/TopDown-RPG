@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.5617602, g: 0.6315239, b: 0.7231441, a: 1}
+  m_IndirectSpecularColor: {r: 0.5617602, g: 0.6315244, b: 0.72314495, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -850,13 +850,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335339830}
-  m_LocalRotation: {x: -0, y: -0, z: 0.14429368, w: 0.9895349}
-  m_LocalPosition: {x: 8.73, y: 1.41, z: 1.92}
+  m_LocalRotation: {x: -0, y: -0, z: 0.10094125, w: 0.9948924}
+  m_LocalPosition: {x: 8.83, y: 0.92, z: 1.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 16.593}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.587001}
 --- !u!1 &343459367 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100094, guid: b5f71c859f9f9bf41badda8a4650082c,
@@ -939,7 +939,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: daa3e158e18e41f4095c685848a9bae0, type: 2}
+  - {fileID: 2100006, guid: b451a052397f03c4f8a04d915d1c0492, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1198,7 +1198,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: daa3e158e18e41f4095c685848a9bae0, type: 2}
+  - {fileID: 2100006, guid: b451a052397f03c4f8a04d915d1c0492, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1506,6 +1506,7 @@ GameObject:
   - component: {fileID: 847105510}
   - component: {fileID: 847105511}
   - component: {fileID: 847105512}
+  - component: {fileID: 847105513}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1573,6 +1574,7 @@ MonoBehaviour:
   rotationSpeed: 0.1
   playerSpeed: {x: 0, y: 0, z: 0}
   stepCounter: 0
+  isMoving: 0
   gravity: -8.35
   groundOffset: 0.08
   randoOffset: 0.08
@@ -1589,6 +1591,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canRotate: 1
+--- !u!114 &847105513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847105508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1ef5acea99d27499b0ee59f8c83016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSteps: 5
+  timeToCheck: 1
+  defaultTimeToCheck: 1
+  time: 0
+  timeBetweenChecks: 0.25
+  minChance: 0
+  maxChance: 100
+  defaultThreshold: 10
+  threshold: 10
+  threshMod: 10
+  value: 0
 --- !u!1 &857024622 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100050, guid: b5f71c859f9f9bf41badda8a4650082c,
@@ -1919,7 +1944,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: daa3e158e18e41f4095c685848a9bae0, type: 2}
+  - {fileID: 2100006, guid: b451a052397f03c4f8a04d915d1c0492, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2285,7 +2310,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: daa3e158e18e41f4095c685848a9bae0, type: 2}
+  - {fileID: 2100006, guid: b451a052397f03c4f8a04d915d1c0492, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

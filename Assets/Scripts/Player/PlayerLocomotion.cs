@@ -33,6 +33,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private Vector3 playerSpeed;
     public float stepCounter;
+    public bool isMoving;
     [SerializeField]
     private float gravity = -9.8f;
     [SerializeField]
@@ -56,7 +57,11 @@ public class PlayerLocomotion : MonoBehaviour
 
         animatorHandler.Initialize();
 
+
+
         randomEncounters = GetComponent<RandomEncounters>();
+
+        
 
 
     }
@@ -92,8 +97,12 @@ public class PlayerLocomotion : MonoBehaviour
         if ((Physics.Raycast(groundChecker.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Abs(randoOffset), randoEnc)))
         /*Physics.Raycast(groundChecker.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Abs(groundOffset), randoEnc))*/
         {
-            Debug.Log("Hit Rando");
-
+            if (randomEncounters.HandleEncounters(delta))
+            {
+                
+                Debug.Log("Encounter Occurs");
+            }
+            
         }
 
 
@@ -133,6 +142,11 @@ public class PlayerLocomotion : MonoBehaviour
         if ((move.x>0||move.x<0)||(move.z>0||move.z<0) &&lastPos!=player.position)
         {
             stepCounter+= movementModifier*delta;
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
         }
 
     }
