@@ -58,10 +58,9 @@ public class RandomEncounters : MonoBehaviour
         {
             time += 1 * delta;
         }
-        if (value == 0)
-        {
+       
             value = Random.Range(minChance, maxChance);
-        }
+       
 
         if (minSteps<=loco.stepCounter && value <= threshold&&loco.isMoving&&time >= timeToCheck)
         {
@@ -69,6 +68,7 @@ public class RandomEncounters : MonoBehaviour
             timeToCheck = defaultTimeToCheck;
             threshold = defaultThreshold;
             value = 0;
+            loco.stepCounter = 0;
             return true;
         }
 

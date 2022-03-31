@@ -1575,9 +1575,9 @@ MonoBehaviour:
   playerSpeed: {x: 0, y: 0, z: 0}
   stepCounter: 0
   isMoving: 0
-  gravity: -8.35
+  gravity: -4.175
   groundOffset: 0.08
-  randoOffset: 0.08
+  randoOffset: 1
 --- !u!114 &847105512
 MonoBehaviour:
   m_ObjectHideFlags: 0
