@@ -13,6 +13,8 @@ public class PlayerLocomotion : MonoBehaviour
     // A reference to AnimatorHandler to animate player
     private AnimatorHandler animatorHandler;
 
+    private RandomEncounters randomEncounters;
+
     // References to the camera rig
     public Transform camParent;
     public Transform cam;
@@ -21,11 +23,12 @@ public class PlayerLocomotion : MonoBehaviour
     public Transform groundChecker;
     //public bool Raycast() groundChecker;
     public LayerMask ground;
+    public LayerMask randoEnc;
 
     public float movementModifier = 10f;
     public float rotationSpeed = 10f;
 
-    private Vector3 lastTrans;
+    private Vector3 lastPos;
 
     [SerializeField]
     private Vector3 playerSpeed;
@@ -34,6 +37,8 @@ public class PlayerLocomotion : MonoBehaviour
     private float gravity = -9.8f;
     [SerializeField]
     private float groundOffset = .1f;
+    [SerializeField]
+    private float randoOffset = 1f;
 
 
 
@@ -50,6 +55,8 @@ public class PlayerLocomotion : MonoBehaviour
         animatorHandler = GetComponent<AnimatorHandler>();
 
         animatorHandler.Initialize();
+
+        randomEncounters = GetComponent<RandomEncounters>();
 
 
     }
@@ -76,18 +83,43 @@ public class PlayerLocomotion : MonoBehaviour
     private void HandleMovement(float delta)
     {
 
-        lastTrans = player.position;
+        lastPos = player.position;
 
-        Vector3 movement = (input.move.x * camParent.right)+  (input.move.y * camParent.forward);
+        Vector3 movement = (input.move.x * camParent.right) + (input.move.y * camParent.forward);
 
         RaycastHit hit;
 
-        if(!(Physics.Raycast(groundChecker.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Abs(groundOffset), ground))
-            )
+        if ((Physics.Raycast(groundChecker.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Abs(randoOffset), randoEnc)))
+        /*Physics.Raycast(groundChecker.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Abs(groundOffset), randoEnc))*/
         {
-            movement = new Vector3(movement.x, gravity, movement.z);
-          
+            Debug.Log("Hit Rando");
+
         }
+
+
+        if (
+            !(Physics.Raycast(groundChecker.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Abs(groundOffset), ground)))
+
+        {
+
+            /*if (lastPos.y+(gravity*delta) != player.position.y)
+            {
+                movement = new Vector3(movement.x, gravity, movement.y);
+            }
+            else
+            {
+            movement = new Vector3(movement.x, 0, movement.z);
+            }
+
+            */
+            movement = new Vector3(movement.x, gravity, movement.z);
+        
+        }
+
+    
+       
+            
+      
 
 
         Vector3 move =( movement * movementModifier * delta);
@@ -98,7 +130,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         playerSpeed = move/delta;
 
-        if ((move.x>0||move.x<0)||(move.z>0||move.z<0) &&lastTrans!=player.position)
+        if ((move.x>0||move.x<0)||(move.z>0||move.z<0) &&lastPos!=player.position)
         {
             stepCounter+= movementModifier*delta;
         }
