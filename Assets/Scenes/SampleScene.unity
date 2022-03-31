@@ -1472,12 +1472,12 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 256
-  movementModifier: 3.97
+  movementModifier: 5
   rotationSpeed: 0.1
   playerSpeed: {x: 0, y: 0, z: 0}
   stepCounter: 0
   gravity: -9.8
-  groundOffset: 0.08
+  groundOffset: 0.1
 --- !u!114 &847105512
 MonoBehaviour:
   m_ObjectHideFlags: 0

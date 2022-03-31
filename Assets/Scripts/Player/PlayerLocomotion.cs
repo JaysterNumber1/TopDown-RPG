@@ -98,7 +98,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         playerSpeed = move/delta;
 
-        if (lastTrans + (move) == player.position&& move != Vector3.zero)
+        if ((move.x>0||move.x<0)||(move.z>0||move.z<0) &&lastTrans!=player.position)
         {
             stepCounter+= movementModifier*delta;
         }
