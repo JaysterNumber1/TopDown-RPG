@@ -2744,6 +2744,7 @@ GameObject:
   - component: {fileID: 787432292}
   - component: {fileID: 787432291}
   - component: {fileID: 787432289}
+  - component: {fileID: 787432288}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2751,6 +2752,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &787432288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787432287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08915412c745c44394922a6188e9a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTransform: {fileID: 0}
+  camTransform: {fileID: 0}
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  followSpeed: 0.1
+  targetPos: 0
 --- !u!114 &787432289
 MonoBehaviour:
   m_ObjectHideFlags: 0
