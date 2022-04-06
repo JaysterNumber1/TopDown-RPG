@@ -131,10 +131,10 @@ MonoBehaviour:
   level: 6
   strength: 3
   defense: 0
-  maxHP: 50
-  currentHP: 30
-  maxMP: 0
-  currentMP: 0
+  maxHP: 200
+  currentHP: 220
+  maxMP: 50
+  currentMP: 20
 --- !u!1001 &3457823856563487418
 PrefabInstance:
   m_ObjectHideFlags: 0
