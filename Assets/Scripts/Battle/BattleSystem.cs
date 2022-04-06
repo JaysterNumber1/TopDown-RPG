@@ -9,6 +9,7 @@ public enum BattleState {START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class BattleSystem : MonoBehaviour
 {
+    private float time = Time.deltaTime;
 
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
@@ -47,5 +48,11 @@ public class BattleSystem : MonoBehaviour
         //enemyHUD.SetHUD(enemyUnit);
     }
 
-    
+    private void Update()
+    {
+        BattleHUD.SpeedChange(time);
+        
+    }
+
+
 }

@@ -24,6 +24,12 @@ public class BattleHUD : MonoBehaviour
         mpSlider.maxValue = unit.maxMP;
         mpSlider.value = unit.currentMP;
 
+
+    }
+
+    public void SpeedChange(float time)
+    {
+
     }
 
     public void SetHP(int hp)
