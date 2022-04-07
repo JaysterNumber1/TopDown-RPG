@@ -135,6 +135,8 @@ MonoBehaviour:
   currentHP: 220
   maxMP: 50
   currentMP: 20
+  speedReq: 10
+  speedMod: 5
 --- !u!1001 &3457823856563487418
 PrefabInstance:
   m_ObjectHideFlags: 0

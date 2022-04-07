@@ -16,7 +16,9 @@ public class Units : MonoBehaviour
 
     public int maxMP;
     public int currentMP;
-    
+
+    public int speedReq;
+    public int speedMod=1;
 
 
 }

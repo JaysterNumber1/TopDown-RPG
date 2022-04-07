@@ -9,7 +9,7 @@ public enum BattleState {START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class BattleSystem : MonoBehaviour
 {
-    private float time = Time.deltaTime;
+   
 
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
@@ -20,18 +20,21 @@ public class BattleSystem : MonoBehaviour
     Units playerUnit;
     Units enemyUnit;
 
+
+
     public TextMeshProUGUI dialogueText;
 
     public BattleState state;
 
     public BattleHUD playerHUD;
-    //public BattleHUD enemyHUD;
+    public BattleHUD enemyHUD;
 
     // Start is called before the first frame update
     void Start()
     {
         state = BattleState.START;
         SetupBattle();
+    
     }
 
     void SetupBattle() 
@@ -45,14 +48,10 @@ public class BattleSystem : MonoBehaviour
         dialogueText.text = "A wild " + enemyUnit.unitName + " appears!";
 
         playerHUD.SetHUD(playerUnit);
-        //enemyHUD.SetHUD(enemyUnit);
+        enemyHUD.SetHUD(enemyUnit);
     }
 
-    private void Update()
-    {
-        BattleHUD.SpeedChange(time);
-        
-    }
+   
 
 
 }

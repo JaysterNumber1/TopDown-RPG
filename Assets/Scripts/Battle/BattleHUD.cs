@@ -10,10 +10,21 @@ public class BattleHUD : MonoBehaviour
     //public TextMeshProUGUI nameText;
    // public TextMeshProUGUI levelText;
     public Slider hpSlider;
-    //public Slider speedSlider;
+    public Slider speedSlider;
     public Slider mpSlider;
-    
-    
+
+    private int speedMod;
+
+
+    private void Start()
+    {
+        speedSlider.value = 0;
+    }
+    private void Update()
+    {
+        SpeedChange(Time.deltaTime);
+
+    }
 
     public void SetHUD(Units unit)
     {
@@ -23,13 +34,18 @@ public class BattleHUD : MonoBehaviour
         hpSlider.value = unit.currentHP;
         mpSlider.maxValue = unit.maxMP;
         mpSlider.value = unit.currentMP;
+        speedSlider.maxValue = unit.speedReq;
+        speedMod = unit.speedMod;
 
 
     }
 
-    public void SpeedChange(float time)
+    
+    private void SpeedChange(float time)
     {
-
+        
+        speedSlider.value+=(time * speedMod * 1);
+        Debug.Log(speedSlider.value);
     }
 
     public void SetHP(int hp)

@@ -92,6 +92,8 @@ MonoBehaviour:
   currentHP: 30
   maxMP: 0
   currentMP: 0
+  speedReq: 50
+  speedMod: 1
 --- !u!114 &-5612014418279975824
 MonoBehaviour:
   m_ObjectHideFlags: 0
