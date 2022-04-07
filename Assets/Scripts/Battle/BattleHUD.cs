@@ -20,11 +20,10 @@ public class BattleHUD : MonoBehaviour
     {
         speedSlider.value = 0;
     }
-    private void Update()
-    {
-        SpeedChange(Time.deltaTime);
+   
+       
 
-    }
+    
 
     public void SetHUD(Units unit)
     {
@@ -41,11 +40,13 @@ public class BattleHUD : MonoBehaviour
     }
 
     
-    private void SpeedChange(float time)
+    public void SpeedChange(float time)
     {
+        if (speedSlider.value != speedSlider.maxValue)
+        {
+            speedSlider.value += (time * speedMod * 1);
+        }
         
-        speedSlider.value+=(time * speedMod * 1);
-        Debug.Log(speedSlider.value);
     }
 
     public void SetHP(int hp)
@@ -53,12 +54,6 @@ public class BattleHUD : MonoBehaviour
         hpSlider.value = hp;
     }
 
-   
-
-   /* public void SetSpeed(int speed)
-    {
-        speedSlider.value = speed;
-    }*/
 
     public void SetMP(int mp)
     {

@@ -5,7 +5,7 @@ using TMPro;
 
 
 
-public enum BattleState {START, PLAYERTURN, ENEMYTURN, WON, LOST }
+public enum BattleState {START, PLAYERTURN, ENEMYTURN, ATTACKING, WAITING, WON, LOST }
 
 public class BattleSystem : MonoBehaviour
 {
@@ -19,6 +19,8 @@ public class BattleSystem : MonoBehaviour
 
     Units playerUnit;
     Units enemyUnit;
+
+    private bool attacking;
 
 
 
@@ -49,9 +51,53 @@ public class BattleSystem : MonoBehaviour
 
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
+
+        state = BattleState.WAITING;
+        
     }
 
-   
+    private void Update()
+    {
+        if (state != BattleState.ATTACKING){
+            playerHUD.SpeedChange(Time.deltaTime);
+            enemyHUD.SpeedChange(Time.deltaTime);
+            if (playerHUD.speedSlider.value == playerHUD.speedSlider.maxValue)
+            {
+                PlayerTurn();
+            }
+            if (enemyHUD.speedSlider.value == enemyHUD.speedSlider.maxValue)
+            {
+                //enemyTurn();
+            }
+        }
+        
+    }
+
+    IEnumerator PlayerAttack()
+    {
+        enemyUnit.TakeDamage(playerUnit.strength);
+
+        yield return new WaitForSeconds(0f);
+
+    }
+
+    void PlayerTurn()
+    {
+        dialogueText.text = "Choose your move:";
+    }
+
+    public void OnAttackButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(PlayerAttack());
+
+    }
+
+
 
 
 }
