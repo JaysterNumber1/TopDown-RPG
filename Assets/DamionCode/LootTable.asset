@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77be274e02ac5834d8a9242fef706f43, type: 3}
   m_Name: LootTable
   m_EditorClassIdentifier: 
-  table: []
+  table:
+  - drop: {fileID: 11400000, guid: 6759495e31d2bc642acaa82fb0e839cf, type: 2}
+    probability: 60
+  - drop: {fileID: 11400000, guid: df68e09a58a9521439ffcd1d056e0210, type: 2}
+    probability: 30
+  - drop: {fileID: 11400000, guid: 98b2f3461878ee84cb0b5c15880e1190, type: 2}
+    probability: 10
