@@ -31,6 +31,8 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
 
+    private int damage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,16 +60,16 @@ public class BattleSystem : MonoBehaviour
 
     private void Update()
     {
-        if (state != BattleState.ATTACKING){
+        if (state!=BattleState.ATTACKING||state!=BattleState.WON||state!=BattleState.LOST){
             playerHUD.SpeedChange(Time.deltaTime);
             enemyHUD.SpeedChange(Time.deltaTime);
             if (playerHUD.speedSlider.value == playerHUD.speedSlider.maxValue)
             {
-                PlayerTurn();
+                StartCoroutine(PlayerTurn());
             }
             if (enemyHUD.speedSlider.value == enemyHUD.speedSlider.maxValue)
             {
-                //enemyTurn();
+                StartCoroutine(EnemyTurn());
             }
         }
         
@@ -75,26 +77,175 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        enemyUnit.TakeDamage(playerUnit.strength);
+        yield return new WaitUntil(() => state == BattleState.PLAYERTURN);
 
-        yield return new WaitForSeconds(0f);
+        state = BattleState.ATTACKING;
+        if (playerUnit.strength - enemyUnit.defense >= 1)
+        {
+            damage = playerUnit.strength - enemyUnit.defense;
+        }
+        else
+        {
+            damage = 1;
+        }
+
+        bool isDead = enemyUnit.TakeDamage(damage);
+
+        enemyHUD.SetHP(enemyUnit.currentHP);
+        dialogueText.text = playerUnit.unitName+" attacked!";
+        playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
+
+       
+      
+
+        if (isDead)
+        {
+          state = BattleState.WON;
+            Object.Destroy(enemyUnit);
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.WAITING;
+        }
+
 
     }
-
-    void PlayerTurn()
+    IEnumerator PlayerMagicAttack()
     {
-        dialogueText.text = "Choose your move:";
+        Debug.Log("Magic ATTACK");
+        yield return new WaitUntil(() => state == BattleState.PLAYERTURN);
+
+        if (playerUnit.currentMP < playerUnit.mpCost)
+        {
+            yield break;
+        }
+        state = BattleState.ATTACKING;
+
+        if (playerUnit.magicStrength - enemyUnit.magicDefense >= 1) 
+        {
+            damage = playerUnit.magicStrength - enemyUnit.magicDefense;
+        } 
+        else { 
+            damage = 1; 
+        }
+        bool isDead = enemyUnit.TakeDamage(damage);
+        playerUnit.currentMP -= playerUnit.mpCost;
+        playerHUD.SetMP(playerUnit.currentMP);
+
+        enemyHUD.SetHP(enemyUnit.currentHP);
+        dialogueText.text = playerUnit.unitName + " attacked!";
+        playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
+
+
+
+
+        if (isDead)
+        {
+            state = BattleState.WON;
+            Object.Destroy(enemyUnit);
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.WAITING;
+        }
+
+
     }
 
-    public void OnAttackButton()
+    IEnumerator EnemyAttack()
+    {
+
+        yield return new WaitUntil(()=>state == BattleState.ENEMYTURN);
+       
+       
+            state = BattleState.ATTACKING;
+
+            dialogueText.text = enemyUnit.unitName + " attacks!";
+
+        if (playerUnit.strength - enemyUnit.defense >= 1)
+        {
+            damage = playerUnit.strength - enemyUnit.defense;
+        }
+        else
+        {
+            damage = 1;
+        }
+
+        bool isDead = playerUnit.TakeDamage(damage);
+
+            playerHUD.SetHP(playerUnit.currentHP);
+        Debug.Log(playerUnit.currentHP);
+        enemyHUD.speedSlider.value = enemyHUD.speedSlider.minValue;
+
+        
+        if (isDead)
+            {
+                state = BattleState.LOST;
+                EndBattle();
+            }
+            else
+            {
+                state = BattleState.WAITING;
+            }
+        }
+    
+
+    void EndBattle()
+    {
+        if (state == BattleState.WON)
+        {
+            dialogueText.text = "You Win";
+
+        } else if(state == BattleState.LOST)
+        {
+            
+            dialogueText.text = "You Lost";
+        }
+        else
+        {
+            state = BattleState.WAITING;
+        }
+               
+    }
+
+    IEnumerator PlayerTurn()
+    {yield return new WaitForSeconds(0f);
+        dialogueText.text = "Choose your move:";
+        
+        state = BattleState.PLAYERTURN;
+    }
+    IEnumerator EnemyTurn()
+    {yield return new WaitForSeconds(0f);
+        dialogueText.text = "Enemy's move:";
+        
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyAttack());
+    }
+
+    public void OnPhysicalButton()
+    {
+        
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        
+        StartCoroutine(PlayerAttack());
+
+    }
+
+    public void OnMagicButton()
     {
         if (state != BattleState.PLAYERTURN)
         {
             return;
         }
 
-        StartCoroutine(PlayerAttack());
 
+        StartCoroutine(PlayerMagicAttack());
     }
 
 

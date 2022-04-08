@@ -9,13 +9,17 @@ public class Units : MonoBehaviour
     public int level;
 
     public int strength;
+    public int magicStrength;
+
     public int defense;
+    public int magicDefense;
 
     public int maxHP;
     public int currentHP;
 
     public int maxMP;
     public int currentMP;
+    public int mpCost;
 
     public int speedReq;
     public int speedMod=1;

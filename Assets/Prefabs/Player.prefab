@@ -130,13 +130,16 @@ MonoBehaviour:
   unitName: Jeffrey
   level: 6
   strength: 3
-  defense: 0
+  magicStrength: 20
+  defense: 5
+  magicDefense: 2
   maxHP: 200
   currentHP: 220
   maxMP: 50
   currentMP: 20
+  mpCost: 5
   speedReq: 10
-  speedMod: 5
+  speedMod: 10
 --- !u!1001 &3457823856563487418
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -86,14 +86,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Jeremy
   level: 1
-  strength: 1
-  defense: 0
+  strength: 79
+  magicStrength: 0
+  defense: 20
+  magicDefense: 0
   maxHP: 30
   currentHP: 30
   maxMP: 0
   currentMP: 0
-  speedReq: 50
-  speedMod: 1
+  mpCost: 0
+  speedReq: 30
+  speedMod: 10
 --- !u!114 &-5612014418279975824
 MonoBehaviour:
   m_ObjectHideFlags: 0
