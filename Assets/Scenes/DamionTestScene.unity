@@ -130,6 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 115797595}
+  - component: {fileID: 115797596}
   m_Layer: 0
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -152,6 +153,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &115797596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115797594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cd0392e5604454e9f7da94688da345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  table: 3c0000001e0000000a000000
+  total: 0
+  randomNumber: 0
 --- !u!1 &461809117
 GameObject:
   m_ObjectHideFlags: 0
