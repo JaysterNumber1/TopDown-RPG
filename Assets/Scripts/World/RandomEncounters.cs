@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RandomEncounters : MonoBehaviour
 {
@@ -83,4 +84,6 @@ public class RandomEncounters : MonoBehaviour
             return false;
         }
     }
+
+    
 }

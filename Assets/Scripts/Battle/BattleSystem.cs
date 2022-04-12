@@ -9,6 +9,7 @@ public enum BattleState {START, PLAYERTURN, ENEMYTURN, ATTACKING, WAITING, WON, 
 
 public class BattleSystem : MonoBehaviour
 {
+
    
 
     public GameObject playerPrefab;
@@ -21,6 +22,7 @@ public class BattleSystem : MonoBehaviour
     Units enemyUnit;
 
     private bool attacking;
+    private SceneChanger sceneChanger;
 
 
 
@@ -37,11 +39,12 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
         state = BattleState.START;
-        SetupBattle();
-    
+        StartCoroutine(SetupBattle());
+        sceneChanger = GetComponent<SceneChanger>();
+
     }
 
-    void SetupBattle() 
+    IEnumerator SetupBattle() 
     {
         GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit =  playerGO.GetComponent<Units>();
@@ -53,6 +56,8 @@ public class BattleSystem : MonoBehaviour
 
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
+
+        yield return new WaitForSeconds(1.5f);
 
         state = BattleState.WAITING;
         
@@ -93,7 +98,7 @@ public class BattleSystem : MonoBehaviour
 
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = playerUnit.unitName+" attacked!";
-        playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
+       
 
        
       
@@ -113,7 +118,7 @@ public class BattleSystem : MonoBehaviour
     }
     IEnumerator PlayerMagicAttack()
     {
-        Debug.Log("Magic ATTACK");
+       
         yield return new WaitUntil(() => state == BattleState.PLAYERTURN);
 
         if (playerUnit.currentMP < playerUnit.mpCost)
@@ -134,9 +139,8 @@ public class BattleSystem : MonoBehaviour
         playerHUD.SetMP(playerUnit.currentMP);
 
         enemyHUD.SetHP(enemyUnit.currentHP);
-        dialogueText.text = playerUnit.unitName + " attacked!";
-        playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
-
+        dialogueText.text = playerUnit.unitName + " used Magic!";
+       
 
 
 
@@ -157,30 +161,33 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyAttack()
     {
 
-        yield return new WaitUntil(()=>state == BattleState.ENEMYTURN);
+        yield return new WaitUntil(() => state == BattleState.ENEMYTURN);
+
+
+        state = BattleState.ATTACKING;
+
        
-       
-            state = BattleState.ATTACKING;
 
-            dialogueText.text = enemyUnit.unitName + " attacks!";
+        dialogueText.text = enemyUnit.unitName + " attacks!";
 
-        if (playerUnit.strength - enemyUnit.defense >= 1)
-        {
-            damage = playerUnit.strength - enemyUnit.defense;
-        }
-        else
-        {
-            damage = 1;
-        }
+            if (enemyUnit.strength - playerUnit.defense >= 1)
+            {
+                damage = enemyUnit.strength - playerUnit.defense;
+            }
+            else
+            {
+                damage = 1;
+            }
 
-        bool isDead = playerUnit.TakeDamage(damage);
+            bool isDead = playerUnit.TakeDamage(damage);
 
             playerHUD.SetHP(playerUnit.currentHP);
-        Debug.Log(playerUnit.currentHP);
-        enemyHUD.speedSlider.value = enemyHUD.speedSlider.minValue;
+          
+           
 
-        
-        if (isDead)
+
+
+            if (isDead)
             {
                 state = BattleState.LOST;
                 EndBattle();
@@ -197,6 +204,7 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             dialogueText.text = "You Win";
+            StartCoroutine(sceneChanger.LoadWorldScene());
 
         } else if(state == BattleState.LOST)
         {
@@ -217,11 +225,15 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERTURN;
     }
     IEnumerator EnemyTurn()
-    {yield return new WaitForSeconds(0f);
-        dialogueText.text = "Enemy's move:";
-        
+    {   
         state = BattleState.ENEMYTURN;
+        dialogueText.text = "Enemy's move:";
+        Debug.Log("enemy attakcs!");
+
+        enemyHUD.speedSlider.value = enemyHUD.speedSlider.minValue;
         StartCoroutine(EnemyAttack());
+
+        yield return new WaitForSeconds(0f);
     }
 
     public void OnPhysicalButton()
@@ -232,8 +244,9 @@ public class BattleSystem : MonoBehaviour
             return;
         }
 
-        
+        playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
         StartCoroutine(PlayerAttack());
+        playerHUD.hideAttackButtons();
 
     }
 
@@ -244,11 +257,26 @@ public class BattleSystem : MonoBehaviour
             return;
         }
 
-
+        playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
         StartCoroutine(PlayerMagicAttack());
+        playerHUD.hideAttackButtons();
     }
 
+    public void OnAttackButton() 
+    {
+        playerHUD.setAttackButtons();
+    }
 
+    public void OnItemButton()
+    {
 
+    }
+
+    public void OnAttackBackButton()
+    {
+        playerHUD.hideAttackButtons();
+    }
+
+    
 
 }

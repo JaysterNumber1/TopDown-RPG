@@ -10,8 +10,12 @@ public class BattleHUD : MonoBehaviour
     //public TextMeshProUGUI nameText;
    // public TextMeshProUGUI levelText;
     public Slider hpSlider;
-    public Slider speedSlider;
     public Slider mpSlider;
+    public Slider speedSlider;
+
+    public Button physicalButton;
+    public Button magicButton;
+    public Button backButton;
 
     private int speedMod;
 
@@ -35,8 +39,9 @@ public class BattleHUD : MonoBehaviour
         mpSlider.value = unit.currentMP;
         speedSlider.maxValue = unit.speedReq;
         speedMod = unit.speedMod;
-
-
+        physicalButton.gameObject.SetActive(false);
+        magicButton.gameObject.SetActive(false);
+        backButton.gameObject.SetActive(false);
     }
 
     
@@ -59,6 +64,23 @@ public class BattleHUD : MonoBehaviour
     {
         mpSlider.value = mp;
     }
+
+    public void setAttackButtons()
+    {
+        physicalButton.gameObject.SetActive(true);
+        magicButton.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(true);
+    }
+    
+    public void hideAttackButtons()
+    {
+        physicalButton.gameObject.SetActive(false);
+        magicButton.gameObject.SetActive(false);
+        backButton.gameObject.SetActive(false);
+    }
+
+
+
 
 
 

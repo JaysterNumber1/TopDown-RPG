@@ -86,7 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Jeremy
   level: 1
-  strength: 79
+  strength: 6
   magicStrength: 0
   defense: 20
   magicDefense: 0

@@ -131,10 +131,10 @@ MonoBehaviour:
   level: 6
   strength: 3
   magicStrength: 20
-  defense: 5
+  defense: 38
   magicDefense: 2
-  maxHP: 200
-  currentHP: 220
+  maxHP: 50
+  currentHP: 30
   maxMP: 50
   currentMP: 20
   mpCost: 5

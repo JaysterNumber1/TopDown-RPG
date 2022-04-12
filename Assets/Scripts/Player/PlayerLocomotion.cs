@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerLocomotion : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class PlayerLocomotion : MonoBehaviour
 
     private RandomEncounters randomEncounters;
 
+    private SceneChanger sceneChanger;
+
+    //public Units units;
+
+   
     // References to the camera rig
     public Transform camParent;
     public Transform cam;
@@ -28,7 +34,8 @@ public class PlayerLocomotion : MonoBehaviour
     public float movementModifier = 10f;
     public float rotationSpeed = 10f;
 
-    private Vector3 lastPos;
+    public Vector3 lastPos;
+    
 
     [SerializeField]
     private Vector3 playerSpeed;
@@ -40,15 +47,18 @@ public class PlayerLocomotion : MonoBehaviour
     private float groundOffset = .1f;
     [SerializeField]
     private float randoOffset = 1f;
+    
 
 
 
 
 
     // Start is called before the first frame update
-    void Start()
+     void Start()
     {
-        
+
+
+
         input = InputManager.instance;
 
         controller = GetComponent<CharacterController>();
@@ -57,15 +67,43 @@ public class PlayerLocomotion : MonoBehaviour
 
         animatorHandler.Initialize();
 
-
+        sceneChanger = GetComponent<SceneChanger>();
 
         randomEncounters = GetComponent<RandomEncounters>();
 
+        StartCoroutine(SetUpPlayer());
         
 
-
+        
+       
+       
     }
 
+    IEnumerator SetUpPlayer()
+    {
+        Vector3 position = GameObject.FindGameObjectWithTag("PlayerTracker").transform.position;
+
+        Quaternion rotation = GameObject.FindGameObjectWithTag("PlayerTracker").transform.rotation;
+
+        Debug.Log(position);
+
+
+
+
+
+        yield return new WaitUntil(() => SceneManager.GetActiveScene().isLoaded);
+
+        lastPos = position;
+        player.position = position;
+
+        Debug.Log(player.position);
+
+        player.rotation = rotation;
+
+    }
+  
+
+    
     // Update is called once per frame
     void Update()
     {
@@ -99,8 +137,10 @@ public class PlayerLocomotion : MonoBehaviour
         {
             if (randomEncounters.HandleEncounters(delta))
             {
+        
+
+                StartCoroutine(sceneChanger.LoadBattleScene());
                 
-                Debug.Log("Encounter Occurs");
             }
             
         }

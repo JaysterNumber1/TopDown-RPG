@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Units : MonoBehaviour
 {
+
+    
+
+
     public string unitName;
 
     public int level;
 
     public int strength;
+    
     public int magicStrength;
 
     public int defense;
@@ -24,6 +30,9 @@ public class Units : MonoBehaviour
     public int speedReq;
     public int speedMod=1;
 
+
+   
+
     public bool TakeDamage(int dmg)
     {
         currentHP -= dmg;
@@ -35,7 +44,6 @@ public class Units : MonoBehaviour
             return false;
         }
     }
-
 
 
 }
