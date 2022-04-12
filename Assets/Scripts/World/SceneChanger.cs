@@ -9,7 +9,7 @@ public class SceneChanger : MonoBehaviour
     {
         
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("BattleScene");
-        
+        yield return new WaitUntil(() => SceneManager.GetActiveScene().isLoaded);
         while (!asyncLoad.isDone)
         {
             yield return null;
@@ -18,7 +18,7 @@ public class SceneChanger : MonoBehaviour
 
     public IEnumerator LoadWorldScene()
     {
-       
+        //yield return new WaitForSeconds(2f);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("WorldScene");
         
         while (!asyncLoad.isDone)

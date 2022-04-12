@@ -28,7 +28,7 @@ public class Units : MonoBehaviour
     public int mpCost;
 
     public int speedReq;
-    public int speedMod=1;
+    public float speedMod=1f;
 
 
    
@@ -45,5 +45,24 @@ public class Units : MonoBehaviour
         }
     }
 
+    public void LevelUp()
+    {
+        strength += Random.Range(3, 5);
+        magicStrength += Random.Range(3, 5);
+
+        defense += Random.Range(3, 5);
+        magicDefense += Random.Range(3, 5);
+
+        speedMod += Random.Range(.1f, .5f);
+
+        ++level;
+    }
+
+    public void PostBattleStats(int HP, int MP)
+    {
+        currentHP = HP;
+        currentMP = MP;
+
+    }
 
 }

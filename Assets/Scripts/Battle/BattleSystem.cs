@@ -15,6 +15,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
+    public GameObject[] prefabs;
+
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
 
@@ -24,6 +26,11 @@ public class BattleSystem : MonoBehaviour
     private bool attacking;
     private SceneChanger sceneChanger;
 
+    private IEnumerator playerAttack;
+    private IEnumerator playerMagicAttack;
+
+
+   
 
 
     public TextMeshProUGUI dialogueText;
@@ -38,10 +45,12 @@ public class BattleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerAttack = PlayerAttack();
+        playerMagicAttack = PlayerMagicAttack();
         state = BattleState.START;
         StartCoroutine(SetupBattle());
         sceneChanger = GetComponent<SceneChanger>();
-
+        
     }
 
     IEnumerator SetupBattle() 
@@ -123,6 +132,10 @@ public class BattleSystem : MonoBehaviour
 
         if (playerUnit.currentMP < playerUnit.mpCost)
         {
+           
+            
+            StopCoroutine(playerMagicAttack);
+
             yield break;
         }
         state = BattleState.ATTACKING;
@@ -148,12 +161,15 @@ public class BattleSystem : MonoBehaviour
         {
             state = BattleState.WON;
             Object.Destroy(enemyUnit);
+            
             EndBattle();
         }
         else
         {
             state = BattleState.WAITING;
         }
+
+        
 
 
     }
@@ -204,6 +220,8 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             dialogueText.text = "You Win";
+            LevelUp();
+            ChangeHPAndMP();
             StartCoroutine(sceneChanger.LoadWorldScene());
 
         } else if(state == BattleState.LOST)
@@ -216,6 +234,28 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.WAITING;
         }
                
+    }
+
+    private void ChangeHPAndMP()
+    {
+        playerPrefab.GetComponent<Units>().PostBattleStats(playerUnit.currentHP, playerUnit.currentMP);
+    }
+
+    private void LevelUp()
+    {
+       
+
+        //int changeStrength =Random.Range(3, 5);
+        //int changeMagicStrength =Random.Range(3, 5);
+
+        //int changeDefense =Random.Range(3, 5);
+        //int changeMagicDefense=Random.Range(3, 5);
+
+        //float changeSpeedMod =Random.Range(.1f, .5f);
+
+        playerPrefab.GetComponent<Units>().LevelUp();
+        
+        
     }
 
     IEnumerator PlayerTurn()
@@ -245,23 +285,31 @@ public class BattleSystem : MonoBehaviour
         }
 
         playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
-        StartCoroutine(PlayerAttack());
+        StartCoroutine(playerAttack);
         playerHUD.hideAttackButtons();
 
     }
 
     public void OnMagicButton()
     {
+        
         if (state != BattleState.PLAYERTURN)
         {
             return;
         }
+       if (playerUnit.currentMP >= playerUnit.mpCost)
+        {
 
-        playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
-        StartCoroutine(PlayerMagicAttack());
-        playerHUD.hideAttackButtons();
+            playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
+            playerHUD.hideAttackButtons();
+            
+        }
+        StartCoroutine(playerMagicAttack);
+        
+        
+
+        
     }
-
     public void OnAttackButton() 
     {
         playerHUD.setAttackButtons();

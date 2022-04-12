@@ -17,7 +17,7 @@ public class BattleHUD : MonoBehaviour
     public Button magicButton;
     public Button backButton;
 
-    private int speedMod;
+    private float speedMod;
 
 
     private void Start()

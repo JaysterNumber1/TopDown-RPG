@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PlayerLocomotion : MonoBehaviour
@@ -27,6 +28,8 @@ public class PlayerLocomotion : MonoBehaviour
     //public Transform camPivot;
     public Transform player;
     public Transform groundChecker;
+
+    public Image loading;
     //public bool Raycast() groundChecker;
     public LayerMask ground;
     public LayerMask randoEnc;
@@ -57,7 +60,7 @@ public class PlayerLocomotion : MonoBehaviour
      void Start()
     {
 
-
+        loading.enabled = true;
 
         input = InputManager.instance;
 
@@ -100,6 +103,10 @@ public class PlayerLocomotion : MonoBehaviour
 
         player.rotation = rotation;
 
+        yield return new WaitForSeconds(1/60);
+
+        loading.enabled = false;
+
     }
   
 
@@ -137,8 +144,8 @@ public class PlayerLocomotion : MonoBehaviour
         {
             if (randomEncounters.HandleEncounters(delta))
             {
-        
 
+                loading.enabled = true;
                 StartCoroutine(sceneChanger.LoadBattleScene());
                 
             }

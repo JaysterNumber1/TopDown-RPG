@@ -57,7 +57,8 @@ public class CameraController : MonoBehaviour
     private void FollowTarget(float delta)
     {
         // create a position somewhere between the current position and target position.
-        Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
+        //Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollowVelocity, delta/ followSpeed);
+        Vector3 targetPosition = targetTransform.position;
 
         // move the camera parent to the targetPosition
         transform.position = targetPosition;
