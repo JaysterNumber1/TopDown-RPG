@@ -5,30 +5,53 @@ using UnityEngine.UI;
 
 public class XpSystem : MonoBehaviour
 {
+    /*
+     * to place on to the player:
+     * 
+     * private GameObject player;
+     * public float xpValue
+     * 
+     * in Update:
+     * 
+     * player.GetComponent<XpSystem>().SetExperience(xpValue)
+     */
 
-    public int level;
-    public float currentExp;
-    public float requiredEp;
-    public float maxExp;
+    public int level = 1;
+    public float xp { get; private set; }
+    public Image xpBarFill;
 
-    public Image xpBarFront;
-    public Image xpBarBack;
-
-    // Start is called before the first frame update
-    void Start()
+    public static int XpNeededToLvl(int currentLevel)
     {
-        xpBarFront.fillAmount = currentExp / maxExp;
-        xpBarBack.fillAmount = currentExp / maxExp;
+        if (currentLevel == 0)
+            return 0;
+
+        return (currentLevel * currentLevel + currentLevel) * 5;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetExperience (float exp)
     {
+        xp += exp;
+        float xpNeeded = XpNeededToLvl(level);
+        float previousXp = XpNeededToLvl(level - 1);
 
+        if(xp >= xpNeeded)
+        {
+            LevelUp();
+            xpNeeded = XpNeededToLvl(level);
+            previousXp = XpNeededToLvl(level - 1);
+        }
+
+        xpBarFill.fillAmount = (xp - previousXp) / (xpNeeded - previousXp);
+
+        if(xpBarFill.fillAmount == 1)
+        {
+            xpBarFill.fillAmount = 0;
+        }
     }
 
-    public void GainExperienceFlatRate(float xpGained)
+    public void LevelUp()
     {
-        currentExp += xpGained;
+        level++;
+        
     }
 }
