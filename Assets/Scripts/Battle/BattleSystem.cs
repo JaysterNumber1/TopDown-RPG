@@ -228,7 +228,7 @@ public class BattleSystem : MonoBehaviour
             dialogueText.text = "You Win";
             if(XpSystem.XpNeededToLvl(playerUnit.level) > playerUnit.currentXP)
             {
-                xpSystem.SetExperience(playerUnit.currentXP);
+                xpSystem.SetExperience(enemyUnit.currentXP);
             } else if(XpSystem.XpNeededToLvl(playerUnit.currentXP) <= playerUnit.currentXP)
             {
                 LevelUp();
