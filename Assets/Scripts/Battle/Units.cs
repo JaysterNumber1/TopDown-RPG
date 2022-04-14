@@ -12,6 +12,7 @@ public class Units : MonoBehaviour
     public string unitName;
 
     public int level;
+    public int currentXP;
 
     public int strength;
     
@@ -54,6 +55,8 @@ public class Units : MonoBehaviour
         magicDefense += Random.Range(3, 5);
 
         speedMod += Random.Range(.1f, .5f);
+
+        currentXP -= XpSystem.XpNeededToLvl(level);
 
         ++level;
     }

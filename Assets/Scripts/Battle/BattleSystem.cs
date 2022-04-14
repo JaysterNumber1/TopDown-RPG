@@ -25,12 +25,14 @@ public class BattleSystem : MonoBehaviour
 
     private bool attacking;
     private SceneChanger sceneChanger;
+    private XpSystem xpSystem;
+    public GameObject handle;
 
     //private IEnumerator playerAttack;
     //private IEnumerator playerMagicAttack;
 
+    
 
-   
 
 
     public TextMeshProUGUI dialogueText;
@@ -49,7 +51,9 @@ public class BattleSystem : MonoBehaviour
         //playerMagicAttack = PlayerMagicAttack();
         state = BattleState.START;
         StartCoroutine(SetupBattle());
-        sceneChanger = GetComponent<SceneChanger>();
+        handle = GameObject.FindGameObjectWithTag("PlayerTracker");
+        sceneChanger = handle.GetComponent<SceneChanger>();
+        xpSystem = handle.GetComponent<XpSystem>();
         
     }
 
@@ -65,6 +69,8 @@ public class BattleSystem : MonoBehaviour
 
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
+
+        
 
         yield return new WaitForSeconds(1.5f);
 
@@ -220,7 +226,14 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             dialogueText.text = "You Win";
-            LevelUp();
+            if(XpSystem.XpNeededToLvl(playerUnit.level) > playerUnit.currentXP)
+            {
+                xpSystem.SetExperience(playerUnit.currentXP);
+            } else if(XpSystem.XpNeededToLvl(playerUnit.currentXP) <= playerUnit.currentXP)
+            {
+                LevelUp();
+                //xpSystem.LevelUp();
+            }
             ChangeHPAndMP();
             StartCoroutine(sceneChanger.LoadWorldScene());
 

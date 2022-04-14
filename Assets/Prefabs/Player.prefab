@@ -128,7 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Jeffrey
-  level: 22
+  level: 6
+  currentXP: 2
   strength: 3
   magicStrength: 20
   defense: 38

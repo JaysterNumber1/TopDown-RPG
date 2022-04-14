@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class XpSystem : MonoBehaviour
 {
@@ -15,10 +17,12 @@ public class XpSystem : MonoBehaviour
      * 
      * player.GetComponent<XpSystem>().SetExperience(xpValue)
      */
+    public GameObject player;
 
-    public int level = 1;
-    public float xp { get; private set; }
-    public Image xpBarFill;
+    public int level;
+    public float xp;
+    public Slider xpBarFill;
+    
 
     public static int XpNeededToLvl(int currentLevel)
     {
@@ -41,11 +45,11 @@ public class XpSystem : MonoBehaviour
             previousXp = XpNeededToLvl(level - 1);
         }
 
-        xpBarFill.fillAmount = (xp - previousXp) / (xpNeeded - previousXp);
+        xpBarFill.value = (xp - previousXp) / (xpNeeded - previousXp);
 
-        if(xpBarFill.fillAmount == 1)
+        if(xpBarFill.value == xpBarFill.minValue)
         {
-            xpBarFill.fillAmount = 0;
+            xpBarFill.value = 0;
         }
     }
 
@@ -53,5 +57,15 @@ public class XpSystem : MonoBehaviour
     {
         level++;
         
+    }
+
+    private void Start()
+    {
+        level = player.GetComponent<Units>().level;
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("WorldScene"))
+        {
+            SetExperience(xp);
+            
+        }
     }
 }

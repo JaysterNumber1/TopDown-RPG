@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - PlayerTracker
+  - XPBarFill
   layers:
   - Default
   - TransparentFX

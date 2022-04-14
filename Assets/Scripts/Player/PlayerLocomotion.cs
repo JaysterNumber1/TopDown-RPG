@@ -17,7 +17,9 @@ public class PlayerLocomotion : MonoBehaviour
 
     private RandomEncounters randomEncounters;
 
-    private SceneChanger sceneChanger;
+    public SceneChanger sceneChanger;
+
+    public GameObject handle;
 
     //public Units units;
 
@@ -29,7 +31,7 @@ public class PlayerLocomotion : MonoBehaviour
     public Transform player;
     public Transform groundChecker;
 
-    public Image loading;
+    
     //public bool Raycast() groundChecker;
     public LayerMask ground;
     public LayerMask randoEnc;
@@ -60,7 +62,7 @@ public class PlayerLocomotion : MonoBehaviour
      void Start()
     {
 
-        loading.enabled = true;
+       
 
         input = InputManager.instance;
 
@@ -70,8 +72,8 @@ public class PlayerLocomotion : MonoBehaviour
 
         animatorHandler.Initialize();
 
-        sceneChanger = GetComponent<SceneChanger>();
-
+        sceneChanger = handle.GetComponent<SceneChanger>();
+        
         randomEncounters = GetComponent<RandomEncounters>();
 
         StartCoroutine(SetUpPlayer());
@@ -105,7 +107,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         yield return new WaitForSeconds(1/60);
 
-        loading.enabled = false;
+        
 
     }
   
@@ -145,7 +147,7 @@ public class PlayerLocomotion : MonoBehaviour
             if (randomEncounters.HandleEncounters(delta))
             {
 
-                loading.enabled = true;
+               
                 StartCoroutine(sceneChanger.LoadBattleScene());
                 
             }
