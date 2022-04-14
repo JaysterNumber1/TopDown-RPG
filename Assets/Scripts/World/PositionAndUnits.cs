@@ -12,7 +12,7 @@ public class PositionAndUnits : MonoBehaviour
     
     public  Vector3 playerPosition;
     public Quaternion playerRot;
-    public bool wasCalled = false;
+    static bool wasCalled = false;
     public GameObject defaultPlayer;
     public GameObject player;
 
@@ -83,6 +83,7 @@ public class PositionAndUnits : MonoBehaviour
             player.GetComponent<Units>().speedReq = defaultPlayer.GetComponent<Units>().speedReq;
 
             wasCalled = true;
+            Debug.Log("Called!");
         }
     }
  

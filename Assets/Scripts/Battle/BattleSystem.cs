@@ -26,8 +26,8 @@ public class BattleSystem : MonoBehaviour
     private bool attacking;
     private SceneChanger sceneChanger;
 
-    private IEnumerator playerAttack;
-    private IEnumerator playerMagicAttack;
+    //private IEnumerator playerAttack;
+    //private IEnumerator playerMagicAttack;
 
 
    
@@ -45,8 +45,8 @@ public class BattleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerAttack = PlayerAttack();
-        playerMagicAttack = PlayerMagicAttack();
+        //playerAttack = PlayerAttack();
+        //playerMagicAttack = PlayerMagicAttack();
         state = BattleState.START;
         StartCoroutine(SetupBattle());
         sceneChanger = GetComponent<SceneChanger>();
@@ -134,7 +134,7 @@ public class BattleSystem : MonoBehaviour
         {
            
             
-            StopCoroutine(playerMagicAttack);
+         
 
             yield break;
         }
@@ -285,7 +285,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
-        StartCoroutine(playerAttack);
+        StartCoroutine(PlayerAttack());
         playerHUD.hideAttackButtons();
 
     }
@@ -302,9 +302,9 @@ public class BattleSystem : MonoBehaviour
 
             playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
             playerHUD.hideAttackButtons();
-            
+            StartCoroutine(PlayerMagicAttack());
         }
-        StartCoroutine(playerMagicAttack);
+        
         
         
 
