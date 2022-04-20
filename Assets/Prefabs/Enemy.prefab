@@ -84,9 +84,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7251c9cdf32e29f499c4be4d8578b3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 0}
   unitName: Jeremy
   level: 1
-  currentXP: 9
+  currentXP: 141
   strength: 6
   magicStrength: 0
   defense: 20

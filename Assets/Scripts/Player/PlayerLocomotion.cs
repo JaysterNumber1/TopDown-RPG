@@ -72,7 +72,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         animatorHandler.Initialize();
 
-        sceneChanger = handle.GetComponent<SceneChanger>();
+        
         
         randomEncounters = GetComponent<RandomEncounters>();
 
@@ -104,6 +104,13 @@ public class PlayerLocomotion : MonoBehaviour
         Debug.Log(player.position);
 
         player.rotation = rotation;
+
+        handle = GameObject.FindGameObjectWithTag("PlayerTracker");
+
+        sceneChanger = handle.GetComponent<SceneChanger>();
+
+
+
 
         yield return new WaitForSeconds(1/60);
 

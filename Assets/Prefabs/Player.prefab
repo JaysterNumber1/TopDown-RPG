@@ -127,10 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7251c9cdf32e29f499c4be4d8578b3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 3457823857731678389}
   unitName: Jeffrey
-  level: 6
-  currentXP: 2
-  strength: 3
+  level: 15
+  currentXP: 0
+  strength: 329
   magicStrength: 20
   defense: 38
   magicDefense: 2
@@ -139,7 +140,7 @@ MonoBehaviour:
   maxMP: 50
   currentMP: 20
   mpCost: 5
-  speedReq: 10
+  speedReq: 1
   speedMod: 10
 --- !u!1001 &3457823856563487418
 PrefabInstance:
