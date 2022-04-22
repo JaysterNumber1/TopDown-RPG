@@ -127,8 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7251c9cdf32e29f499c4be4d8578b3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 3457823857731678389, guid: 4f37b89a4f21c7943883c3559f3a321e,
+    type: 3}
   unitName: Jeffrey
-  level: 6
+  level: 15
+  currentXP: 0
   strength: 3
   magicStrength: 20
   defense: 38

@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class Units : MonoBehaviour
 {
 
-    
 
+    public GameObject playerPrefab;
 
     public string unitName;
 
@@ -48,17 +48,28 @@ public class Units : MonoBehaviour
 
     public void LevelUp()
     {
+        
+  
+
         strength += Random.Range(3, 5);
         magicStrength += Random.Range(3, 5);
+        defense+= Random.Range(3, 5);
 
-        defense += Random.Range(3, 5);
-        magicDefense += Random.Range(3, 5);
+        magicDefense  += Random.Range(3, 5);
+        maxHP += Random.Range(3, 5);
+        maxMP += Random.Range(3, 5);
 
         speedMod += Random.Range(.1f, .5f);
 
+        
         currentXP -= XpSystem.XpNeededToLvl(level);
+        level++;
 
-        ++level;
+    }
+
+    public int GainXP(int gainingXP)
+    {
+        return currentXP += gainingXP;
     }
 
     public void PostBattleStats(int HP, int MP)

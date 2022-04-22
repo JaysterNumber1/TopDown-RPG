@@ -70,17 +70,18 @@ public class BattleSystem : MonoBehaviour
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
-        
+       
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
 
         state = BattleState.WAITING;
         
+
     }
 
     private void Update()
     {
-        if (state!=BattleState.ATTACKING||state!=BattleState.WON||state!=BattleState.LOST){
+        if (state!=BattleState.ATTACKING&&state!=BattleState.WON&&state!=BattleState.LOST&&state!=BattleState.START){
             playerHUD.SpeedChange(Time.deltaTime);
             enemyHUD.SpeedChange(Time.deltaTime);
             if (playerHUD.speedSlider.value == playerHUD.speedSlider.maxValue)
@@ -226,14 +227,23 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             dialogueText.text = "You Win";
-            if(XpSystem.XpNeededToLvl(playerUnit.level) > playerUnit.currentXP)
-            {
+            
+           
+                playerUnit.currentXP = playerPrefab.GetComponent<Units>().GainXP(enemyUnit.currentXP);
                 xpSystem.SetExperience(enemyUnit.currentXP);
-            } else if(XpSystem.XpNeededToLvl(playerUnit.currentXP) <= playerUnit.currentXP)
-            {
-                LevelUp();
-                //xpSystem.LevelUp();
-            }
+               
+                Debug.Log(playerUnit.currentXP);
+                if (XpSystem.XpNeededToLvl(playerUnit.level) <= playerUnit.currentXP)
+                {
+                    Debug.Log(playerUnit.currentXP);
+                    LevelUp();
+
+                    //xpSystem.LevelUp();
+
+                }
+            
+             
+           
             ChangeHPAndMP();
             StartCoroutine(sceneChanger.LoadWorldScene());
 

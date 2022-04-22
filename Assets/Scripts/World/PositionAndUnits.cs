@@ -81,6 +81,8 @@ public class PositionAndUnits : MonoBehaviour
             player.GetComponent<Units>().mpCost = defaultPlayer.GetComponent<Units>().mpCost;
             player.GetComponent<Units>().speedMod = defaultPlayer.GetComponent<Units>().speedMod;
             player.GetComponent<Units>().speedReq = defaultPlayer.GetComponent<Units>().speedReq;
+            player.GetComponent<Units>().currentXP = defaultPlayer.GetComponent<Units>().currentXP;
+            
 
             wasCalled = true;
             Debug.Log("Called!");
