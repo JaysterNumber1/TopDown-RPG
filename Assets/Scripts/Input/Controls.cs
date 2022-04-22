@@ -33,6 +33,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""a5531075-a36d-46bf-bb99-d7efcc911264"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -101,6 +109,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93056ab2-2eb2-4ece-a93b-cc7220d98013"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -111,6 +130,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Locomotion = asset.FindActionMap("Locomotion", throwIfNotFound: true);
         m_Locomotion_Move = m_Locomotion.FindAction("Move", throwIfNotFound: true);
         m_Locomotion_Look = m_Locomotion.FindAction("Look", throwIfNotFound: true);
+        m_Locomotion_Menu = m_Locomotion.FindAction("Menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -162,12 +182,14 @@ public class @Controls : IInputActionCollection, IDisposable
     private ILocomotionActions m_LocomotionActionsCallbackInterface;
     private readonly InputAction m_Locomotion_Move;
     private readonly InputAction m_Locomotion_Look;
+    private readonly InputAction m_Locomotion_Menu;
     public struct LocomotionActions
     {
         private @Controls m_Wrapper;
         public LocomotionActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Locomotion_Move;
         public InputAction @Look => m_Wrapper.m_Locomotion_Look;
+        public InputAction @Menu => m_Wrapper.m_Locomotion_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Locomotion; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -183,6 +205,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Look.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnLook;
+                @Menu.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_LocomotionActionsCallbackInterface = instance;
             if (instance != null)
@@ -193,6 +218,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -201,5 +229,6 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }

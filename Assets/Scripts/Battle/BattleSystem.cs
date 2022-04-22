@@ -232,15 +232,7 @@ public class BattleSystem : MonoBehaviour
                 playerUnit.currentXP = playerPrefab.GetComponent<Units>().GainXP(enemyUnit.currentXP);
                 xpSystem.SetExperience(enemyUnit.currentXP);
                
-                Debug.Log(playerUnit.currentXP);
-                if (XpSystem.XpNeededToLvl(playerUnit.level) <= playerUnit.currentXP)
-                {
-                    Debug.Log(playerUnit.currentXP);
-                    LevelUp();
-
-                    //xpSystem.LevelUp();
-
-                }
+                
             
              
            

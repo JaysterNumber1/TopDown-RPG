@@ -62,7 +62,7 @@ public class Units : MonoBehaviour
         speedMod += Random.Range(.1f, .5f);
 
         
-        currentXP -= XpSystem.XpNeededToLvl(level);
+        
         level++;
 
     }

@@ -20,6 +20,7 @@ public class PlayerLocomotion : MonoBehaviour
     public SceneChanger sceneChanger;
 
     public GameObject handle;
+    public GameObject inventory;
 
     //public Units units;
 
@@ -90,7 +91,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         Quaternion rotation = GameObject.FindGameObjectWithTag("PlayerTracker").transform.rotation;
 
-        Debug.Log(position);
+       
 
 
 
@@ -101,7 +102,7 @@ public class PlayerLocomotion : MonoBehaviour
         lastPos = position;
         player.position = position;
 
-        Debug.Log(player.position);
+
 
         player.rotation = rotation;
 
@@ -123,16 +124,22 @@ public class PlayerLocomotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        HandleMovement(Time.deltaTime);
-
-        if (animatorHandler.canRotate)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            HandleRotation(Time.deltaTime);
+            Menu();
         }
+        else
+        {
 
-        animatorHandler.UpdateAnimatorValues(input.moveAmount, 0);
+            HandleMovement(Time.deltaTime);
 
+            if (animatorHandler.canRotate)
+            {
+                HandleRotation(Time.deltaTime);
+            }
+
+            animatorHandler.UpdateAnimatorValues(input.moveAmount, 0);
+        }
 
     }
     /// <summary>
@@ -141,6 +148,7 @@ public class PlayerLocomotion : MonoBehaviour
     /// <param name="delta"></param>
     private void HandleMovement(float delta)
     {
+
 
         lastPos = player.position;
 
@@ -238,5 +246,11 @@ public class PlayerLocomotion : MonoBehaviour
 
     }
 
-
+    private void Menu()
+    {
+        if (!inventory)
+        {
+            inventory.
+        }   
+    }
 }

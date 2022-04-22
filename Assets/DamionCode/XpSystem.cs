@@ -20,10 +20,10 @@ public class XpSystem : MonoBehaviour
     public GameObject player;
 
     public int level;
-    public float xp;
+    public int xp;
     public Slider xpBarFill;
 
-    private float xpNeeded;
+    private int xpNeeded;
     private float previousXp;
 
     public static int XpNeededToLvl(int currentLevel)
@@ -34,20 +34,15 @@ public class XpSystem : MonoBehaviour
         return (currentLevel);
     }
 
-    public void SetExperience (float exp)
+    public void SetExperience(int exp)
     {
         xp += exp;
         xpNeeded = XpNeededToLvl(level);
         //previousXp = XpNeededToLvl(level - 1);
-       
+
         if (xp >= xpNeeded)
         {
-            xpBarFill.value = xp - xpNeeded;
-
-            ++level;
-            xpNeeded = XpNeededToLvl(level);
-            previousXp = XpNeededToLvl(level - 1);
-            xpBarFill.maxValue = XpNeededToLvl(level);
+            LevelUp();
 
         }
         else
@@ -56,7 +51,7 @@ public class XpSystem : MonoBehaviour
             xpBarFill.value = xp;
 
         }
-        if(xpBarFill.value == xpBarFill.minValue)
+        if (xpBarFill.value == xpBarFill.minValue)
         {
             xpBarFill.value = 0;
         }
@@ -64,8 +59,19 @@ public class XpSystem : MonoBehaviour
 
     public void LevelUp()
     {
+        xp -= xpNeeded;
+        xpBarFill.value = xp ;
+
         ++level;
-        
+        xpNeeded = XpNeededToLvl(level);
+        previousXp = XpNeededToLvl(level - 1);
+        xpBarFill.maxValue = XpNeededToLvl(level);
+        player.GetComponent<Units>().LevelUp();
+        player.GetComponent<Units>().currentXP = xp;
+        if (xp >= xpNeeded)
+        {
+            LevelUp();
+        }
     }
 
     private void Start()

@@ -85,7 +85,7 @@ public class PositionAndUnits : MonoBehaviour
             
 
             wasCalled = true;
-            Debug.Log("Called!");
+
         }
     }
  
