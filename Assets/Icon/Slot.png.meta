@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: a6d62ea8b89032440a0cfaa5cbc43fc7
+guid: bf27dd1d5d4ba3c4e92ee7cf7b104bee
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -728910801545713313
-    second: Inventory Border_0
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -44,12 +41,12 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
-  spriteExtrude: 32
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 9, y: 8, z: 9, w: 7}
+  spriteBorder: {x: 58, y: 58, z: 58, w: 58}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -88,28 +85,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Inventory Border_0
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 2
-        width: 26
-        height: 28
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 22, z: 20, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f592ce8ec7362e5f0800000000000000
-      internalID: -728910801545713313
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
