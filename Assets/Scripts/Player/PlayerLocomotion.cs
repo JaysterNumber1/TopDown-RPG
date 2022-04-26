@@ -41,6 +41,9 @@ public class PlayerLocomotion : MonoBehaviour
     public float rotationSpeed = 10f;
 
     public Vector3 lastPos;
+
+
+    
     
 
     [SerializeField]
@@ -53,6 +56,8 @@ public class PlayerLocomotion : MonoBehaviour
     private float groundOffset = .1f;
     [SerializeField]
     private float randoOffset = 1f;
+    [SerializeField]
+    private bool inventoryActive = false;
     
 
 
@@ -63,7 +68,7 @@ public class PlayerLocomotion : MonoBehaviour
      void Start()
     {
 
-       
+        inventory.SetActive(false);
 
         input = InputManager.instance;
 
@@ -116,7 +121,7 @@ public class PlayerLocomotion : MonoBehaviour
         yield return new WaitForSeconds(1/60);
 
         
-
+         
     }
   
 
@@ -124,13 +129,15 @@ public class PlayerLocomotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (input.menu)
         {
+            Debug.Log("HEEHEEHEEHAW");
+            input.menu = false;
             Menu();
         }
         else
         {
-
+        
             HandleMovement(Time.deltaTime);
 
             if (animatorHandler.canRotate)
@@ -248,9 +255,16 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Menu()
     {
-        if (!inventory)
+        if (inventoryActive)
         {
-            inventory.
-        }   
+            inventory.SetActive(false);
+            inventoryActive = false;
+        }
+        else
+        {
+            inventory.SetActive(true);
+            inventoryActive = true;
+        }
+        
     }
 }

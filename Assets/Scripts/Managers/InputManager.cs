@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
 
     public Vector2 move;
     public float moveAmount;
+    public bool menu;
 
     public Vector2 look;
 
@@ -49,8 +50,12 @@ public class InputManager : MonoBehaviour
 
         controls.Locomotion.Look.performed += controls => look = controls.ReadValue<Vector2>();
 
+        controls.Locomotion.Menu.performed += controls => menu = true;
         
-        // args(or underscore) => 
+        
+            
+            
+            // args(or underscore) => 
     }
 
     /* Update is called once per frame
