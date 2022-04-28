@@ -131,7 +131,6 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (input.menu)
         {
-            Debug.Log("HEEHEEHEEHAW");
             input.menu = false;
             Menu();
         }

@@ -82,6 +82,7 @@ public class PositionAndUnits : MonoBehaviour
             player.GetComponent<Units>().speedMod = defaultPlayer.GetComponent<Units>().speedMod;
             player.GetComponent<Units>().speedReq = defaultPlayer.GetComponent<Units>().speedReq;
             player.GetComponent<Units>().currentXP = defaultPlayer.GetComponent<Units>().currentXP;
+            player.GetComponent<Units>().runChance = defaultPlayer.GetComponent<Units>().runChance;
             
 
             wasCalled = true;

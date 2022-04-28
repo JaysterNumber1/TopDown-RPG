@@ -340,6 +340,24 @@ public class BattleSystem : MonoBehaviour
         playerHUD.hideAttackButtons();
     }
 
+    public void OnRunButton()
+    {
+        if (state != BattleState.PLAYERTURN||playerHUD.speedSlider.value!=playerHUD.speedSlider.maxValue)
+        {
+            return;
+        }
+        int runChance = playerUnit.runChance;
+        if (Random.Range(0, 100) < runChance)
+        {
+            StartCoroutine(sceneChanger.LoadWorldScene());
+        }
+        else
+        {
+            state = BattleState.WAITING;
+            Debug.Log("Running Failed!");
+            playerHUD.speedSlider.value = playerHUD.speedSlider.minValue;
+        }
+    }
     
 
 }

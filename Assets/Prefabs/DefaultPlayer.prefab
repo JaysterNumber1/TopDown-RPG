@@ -143,6 +143,7 @@ MonoBehaviour:
   mpCost: 5
   speedReq: 10
   speedMod: 10
+  runChance: 25
 --- !u!1001 &3457823856563487418
 PrefabInstance:
   m_ObjectHideFlags: 0

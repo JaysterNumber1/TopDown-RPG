@@ -31,7 +31,7 @@ public class Units : MonoBehaviour
     public int speedReq;
     public float speedMod=1f;
 
-
+    public int runChance = 1;
    
 
     public bool TakeDamage(int dmg)

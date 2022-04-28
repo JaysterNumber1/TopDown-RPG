@@ -129,19 +129,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3457823857731678389}
   unitName: Jeffrey
-  level: 65
-  currentXP: -1914
-  strength: 34
-  magicStrength: 51
-  defense: 67
-  magicDefense: 34
-  maxHP: 84
-  currentHP: 28
-  maxMP: 81
-  currentMP: 0
+  level: 15
+  currentXP: 0
+  strength: 3
+  magicStrength: 20
+  defense: 38
+  magicDefense: 2
+  maxHP: 50
+  currentHP: 30
+  maxMP: 50
+  currentMP: 20
   mpCost: 5
   speedReq: 10
-  speedMod: 12.931528
+  speedMod: 10
+  runChance: 8
 --- !u!1001 &3457823856563487418
 PrefabInstance:
   m_ObjectHideFlags: 0
