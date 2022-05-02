@@ -20,7 +20,10 @@ public class PlayerLocomotion : MonoBehaviour
     public SceneChanger sceneChanger;
 
     public GameObject handle;
-    public GameObject inventory;
+    public Canvas inventory;
+    public Image menuButtons;
+    public Image inventoryBackground;
+
 
     //public Units units;
 
@@ -57,7 +60,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private float randoOffset = 1f;
     [SerializeField]
-    private bool inventoryActive = false;
+    private bool menuActive = false;
     
 
 
@@ -68,13 +71,15 @@ public class PlayerLocomotion : MonoBehaviour
      void Start()
     {
 
-        inventory.SetActive(false);
+        menuButtons.gameObject.SetActive(false);
 
         input = InputManager.instance;
 
         controller = GetComponent<CharacterController>();
 
         animatorHandler = GetComponent<AnimatorHandler>();
+
+        
 
         animatorHandler.Initialize();
 
@@ -254,15 +259,18 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Menu()
     {
-        if (inventoryActive)
+        if (menuActive)
         {
-            inventory.SetActive(false);
-            inventoryActive = false;
+            menuButtons.gameObject.SetActive(false);
+            menuActive = false;
+            inventoryBackground.gameObject.SetActive(false);
         }
         else
         {
-            inventory.SetActive(true);
-            inventoryActive = true;
+            menuButtons.gameObject.SetActive(true);
+            menuActive = true;
+            inventory.GetComponent<MenuOptions>().SetMenuButtons();
+            //inventoryBackground.gameObject.SetActive(true);
         }
         
     }
